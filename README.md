@@ -1,2 +1,2 @@
 # website
-website for ieo
+iP2PGlobal Website
