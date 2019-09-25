@@ -12,7 +12,7 @@
 body {
   background: #fff;
   color: #666666;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Helvetica Neue", Helvetica;
   overflow-x: hidden;
 }
 
@@ -32,6 +32,7 @@ a:focus {
 p {
   padding: 0;
   margin: 0 0 30px 0;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 h1,
@@ -83,12 +84,15 @@ h6 {
   left: 0;
   top: 0;
   right: 0;
-  transition: all 0.5s;
   z-index: 997;
 }
 
 #header #logo {
   float: left;
+  position:fixed;
+  max-height: 100px;
+      margin-top: -30px;
+          margin-right: -30px;
 }
 
 #header #logo h1 {
@@ -109,15 +113,14 @@ h6 {
 }
 
 #header #logo img {
-  padding: 0;
+  padding: 0px;
   margin: 0;
 }
 
 #header.header-fixed {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
-  padding: 20px 0;
-  height: 72px;
-  transition: all 0.5s;
+  padding: 30px;
+  height: 100px;
 }
 
 /*--------------------------------------------------------------
@@ -127,9 +130,10 @@ h6 {
 #intro {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(45deg, rgba(124, 252, 0, 0.4), rgba(173, 255, 47, 0.3)), url("../images/bg-home.jpg") center top no-repeat;
+  background: linear-gradient(45deg, rgba(29, 224, 153, 0.8), rgba(29, 200, 205, 0.8)),url("../static/images/13146.jpg");
   background-size: cover;
   position: relative;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #intro .intro-text {
@@ -172,6 +176,7 @@ h6 {
   margin-bottom: 20px;
   padding: 0 15px;
   font-size: 24px;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #intro .btn-get-started {
@@ -463,10 +468,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 
 .section-header .section-title {
-  font-size: 32px;
+  font-size: 36px;
   color: #111;
   text-align: center;
   font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 .section-header .section-description {
@@ -480,7 +486,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   display: block;
   width: 60px;
   height: 3px;
-  background: #1dcd22;
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
   margin: 0 auto;
   margin-bottom: 20px;
 }
@@ -519,13 +525,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 #about .content h3 {
   color: #777;
   font-weight: 300;
-  font-size: 18px;
-  line-height: 26px;
-  font-style: italic;
+  font-size: 22px;
+  line-height: 36px;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #about .content p {
-  line-height: 26px;
+  line-height: 36px;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #about .content p:last-child {
@@ -592,6 +599,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-weight: 300;
   margin-bottom: 15px;
   font-size: 22px;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #features .title a {
@@ -602,6 +610,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 10px;
+  font-family: "Helvetica Neue", Helvetica;
+  text-align: "justify";
 }
 
 #features .section-description {
@@ -932,8 +942,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #team .member h4 {
   font-weight: 700;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   font-size: 18px;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #team .member span {
@@ -959,6 +970,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin: 0 2px;
 }
 
+
+	
 /* Gallery Section
 --------------------------------*/
 
@@ -1014,6 +1027,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
   padding: 60px 0;
   overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica;
 }
 
 #contact .contact-about h3 {
@@ -1021,7 +1035,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin: 0 0 10px 0;
   padding: 0;
   line-height: 1;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Helvetica Neue", Helvetica;
   font-weight: 300;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1031,12 +1045,17 @@ body.mobile-nav-active #mobile-nav-toggle {
 #contact .contact-about p {
   font-size: 14px;
   line-height: 24px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Helvetica Neue", Helvetica;
   color: #888;
 }
 
 #contact .social-links {
   padding-bottom: 20px;
+}
+
+#contact a{
+   color: black;
+    line-height: 2;
 }
 
 #contact .social-links a {
@@ -1130,6 +1149,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   cursor: pointer;
 }
 
+
+
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -1182,20 +1204,20 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 768px) {
   #intro {
     background-attachment: fixed;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   #header #logo h1 {
     font-size: 28px;
     margin-top: 0;
   }
 
   #header #logo img {
-    max-height: 40px;
+    max-height: 100px;
   }
 
   #intro h2 {
@@ -1206,7 +1228,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   #intro p {
     font-size: 18px;
     line-height: 24px;
-    margin-bottom: 20px;
+    margin-top: 70px;
   }
 
   #nav-menu-container {

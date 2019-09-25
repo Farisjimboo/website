@@ -1,4 +1,5 @@
 {% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +7,35 @@
 <base href="/">
   <head>
   <title>iP2PGo</title>
+
+	      <!-- first load django static tag. -->
   <link rel = "icon" type = "image/x-icon" src ="{% static "images/ip2p_png.png" %}">
 
   </head>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-           <script src="https://cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js"></script>
+	   
+	<script type="text/javascript" src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/easing/easing.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/wow/wow.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/superfish/hoverIntent.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/superfish/superfish.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lib/magnific-popup/magnific-popup.min.js' %}"></script>
 
-  <script>
-		// Set the date we're counting down to
-		var countDownDate = new Date("Nov 18, 2019 00:00:00").getTime();
+  <!-- Contact Form JavaScript File 
+  <script type="text/javascript" src="contactform/contactform.js"></script> -->
 
-         // Update the count down every 1 second
-          var x = setInterval(function() {
+  <!-- Template Main Javascript File -->
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+
+  
+<script>
+// Set the date we're counting down to
+	var countDownDate = new Date("Oct 18, 2019 00:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
 
 	  // Get today's date and time
 	  var now = new Date().getTime();
@@ -33,14 +50,16 @@
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 	    
 	  // Output the result in an element with id="demo"
-	  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-	  + minutes + "m " + seconds + "s ";
+	  document.getElementById("demo").innerHTML = days + "Days " + " " + hours + " " + "Hours " + " "
+	  + minutes + " " + "Minutes " + " " + seconds + " " +  "Seconds ";
 	    
 	  // If the count down is over, write some text 
 	  if (distance < 0) {
 		      clearInterval(x);
-		      document.getElementById("demo").innerHTML = "TWQ is now available!!";
-		    }}, 1000);
+		      document.getElementById("demo").innerHTML = "EXPIRED";
+		    }
+}, 1000);
+
   </script>	  
 
 
@@ -52,141 +71,6 @@
 		          });
   });
   </script>	  
-  <script>
-  jQuery(document).ready(function($) {
-
-   // Header fixed and Back to top button
-   $(window).scroll(function() {
-		        if ($(this).scrollTop() > 100) {
-				      $('.back-to-top').fadeIn('slow');
-				      $('#header').addClass('header-fixed');
-				    } else {
-					          $('.back-to-top').fadeOut('slow');
-					          $('#header').removeClass('header-fixed');
-					        }
-		      });
-
-	    if ($(this).scrollTop() > 100) {
-		        $('.back-to-top').fadeIn('slow');
-		        $('#header').addClass('header-fixed');
-		      }
-
-	    $('.back-to-top').click(function() {
-		        $('html, body').animate({
-				      scrollTop: 0
-				    }, 1500, 'easeInOutExpo');
-		        return false;
-		      });
-
-	    // Initiate the wowjs animation library
-	    new WOW().init();
-
-	    // Initiate superfish on nav menu
-	    $('.nav-menu').superfish({
-		        animation: {
-				      opacity: 'show'
-				    },
-		        speed: 400
-		      });
-
-	    // Mobile Navigation
-	    if ($('#nav-menu-container').length) {
-		        var $mobile_nav = $('#nav-menu-container').clone().prop({
-				      id: 'mobile-nav'
-				    });
-		        $mobile_nav.find('> ul').attr({
-				      'class': '',
-				      'id': ''
-				    });
-		        $('body').append($mobile_nav);
-		        $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
-		        $('body').append('<div id="mobile-body-overly"></div>');
-		        $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
-
-		        $(document).on('click', '.menu-has-children i', function(e) {
-				      $(this).next().toggleClass('menu-item-active');
-				      $(this).nextAll('ul').eq(0).slideToggle();
-				      $(this).toggleClass("fa-chevron-up fa-chevron-down");
-				    });
-
-		        $(document).on('click', '#mobile-nav-toggle', function(e) {
-				      $('body').toggleClass('mobile-nav-active');
-				      $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-				      $('#mobile-body-overly').toggle();
-				    });
-
-		        $(document).click(function(e) {
-				      var container = $("#mobile-nav, #mobile-nav-toggle");
-				            if (!container.is(e.target) && container.has(e.target).length === 0) {
-					            if ($('body').hasClass('mobile-nav-active')) {
-						              $('body').removeClass('mobile-nav-active');
-							                $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-									          $('#mobile-body-overly').fadeOut();
-										          }
-											        }
-												    });
-												      } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
-												          $("#mobile-nav, #mobile-nav-toggle").hide();
-													    }
-
-	    // Smoth scroll on page hash links
-	    $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
-		        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-				      var target = $(this.hash);
-				      if (target.length) {
-					              var top_space = 0;
-
-					              if ($('#header').length) {
-							                top_space = $('#header').outerHeight();
-
-							                if( ! $('#header').hasClass('header-fixed') ) {
-										            top_space = top_space - 20;
-										          }
-							              }
-
-					              $('html, body').animate({
-							                scrollTop: target.offset().top - top_space
-							              }, 1500, 'easeInOutExpo');
-
-					              if ($(this).parents('.nav-menu').length) {
-							                $('.nav-menu .menu-active').removeClass('menu-active');
-							                $(this).closest('li').addClass('menu-active');
-							              }
-
-					              if ($('body').hasClass('mobile-nav-active')) {
-							                $('body').removeClass('mobile-nav-active');
-							                $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-							                $('#mobile-body-overly').fadeOut();
-									        }
-										        return false;
-											      }
-											          }
-												    });
-
-	    // Gallery - uses the magnific popup jQuery plugin
-	    $('.gallery-popup').magnificPopup({
-		        type: 'image',
-		        removalDelay: 300,
-		        mainClass: 'mfp-fade',
-		        gallery: {
-				      enabled: true
-				    },
-		        zoom: {
-				      enabled: true,
-				      duration: 300,
-				      easing: 'ease-in-out',
-				      opener: function(openerElement) {
-					              return openerElement.is('img') ? openerElement : openerElement.find('img');
-					            }
-				    }
-		      });
-
-	    // custom code
-
-  });
-
-	  
-  </script>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
@@ -201,15 +85,18 @@
 
   <!-- Bootstrap CSS File -->
   <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
+   <link href="{% static 'lib/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
   <!-- Libraries CSS Files -->
   <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
-  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" >
   <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
   <link href="{% static 'lib/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %} " rel="stylesheet" type="">
+  <link href="{% static 'css/social_share.css' %} " rel="stylesheet" type="">
+
+    <link href="{% static 'lib/bootstrap/css/countdown.css' %} " rel="stylesheet">
 
   <!-- =======================================================
     Theme Name: Avilon
@@ -227,38 +114,63 @@
   <header id="header">
     <div class="container">
 
-      <div id="logo" class="pull-left">
-	      <!-- <h1><a href="#intro" class="scrollto">iP2PGo</a></h1> -->
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
+      <div id="logo" class="pull-left" style="padding:0px">
+	<img width=100px" height="100px" class="img-fluid" src="{% static 'images/ip2pglobal_logo.png' %}" alt="" title="">
       </div>
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-		<li class="menu-active"><a href="#intro"><b>Home</b></a></li>
-	  <li><a href="#about"><b>Our Mission</b></a></li>
-	  <li><a href="#features"><b>Key Features</b></a></li>
-	  <li><a href="#itinerary"><b>Itinerary</b></a></li>
-	  <li><a href="#team"><b>Team</b></a></li>
-	  <li><a href="#partner"><b>Our Partners</b></a></li>
-	  <li><a href="#contact"><b>Contact Us</b></a></li>
+		<li class="menu-active"><a style="font-size:18px" href="#intro"><b>Home</b></a></li>
+	  <li><a style="font-size:18px"href="#about"><b>Our Mission</b></a></li>
+	  <li><a style="font-size:18px" href="#features"><b>Key Features</b></a></li>
+	  <li><a style="font-size:18px" href="#milestone"><b>Milestone</b></a></li>
+	  <li><a style="font-size:18px" href="#team"><b>Team</b></a></li>
+	  <li><a style="font-size:18px" href="#partner"><b>Our Partners</b></a></li>
+	  <li><a style="font-size:18px" href="#contact"><b>Contact Us</b></a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
+
+ <!--==========================
+     Social Media
+============================-->
+
+      <ul class="ct-socials">
+       <li>
+        <a href="/" target="_blank"><i class="fa fa-twitter"></i></a>
+	</li>
+        <li>
+        <a href="/" target="_blank"><i class="fa fa-facebook"></i></a>
+        </li>
+	<li>
+	<a href="/" target="_blank"><i class="fa fa-telegram"></i></a>
+        </li>
+	<li>
+	<a href="/" target="_blank"><i class="fa fa-instagram"></i></a>
+	</li>
+	<li>
+	<a href="/" target="_blank"><i class="fa fa-youtube"></i></a>
+	 </li>
+	<li>
+  </ul>
+  <!-- social media -->
+
 
   <!--==========================
     Home Section
   ============================-->
   <section id="intro">
     <div class="intro-text">
-	    <div class="col-lg-7">
-		    <h3 style="color:white"> iP2PGlobal is the ﬁrst shariah compliant peer to peer ﬁnancing platform for the global markets</h3>
-	    <img  width=300px" height="300px" src="{% static "images/twq_logo.png"%}" >
-      <p>Borrowers can apply for both unsecured and secured ﬁnancing through the iP2PGlobal Platform by staking TWQ Tokens. </p>
+	    <div class="col-lg-7"><br>
+		    <p style="color:white; text-shadow:1px; font-size:27px "> iP2PGlobal is the ﬁrst shariah compliant peer to peer ﬁnancing platform for the global markets</p>
+	    <img  width=250px" height="250px" src="{% static "images/twq_logo.png"%}" >
+    <p style="color:white; text-shadow:1px">Borrowers can apply for both unsecured and secured ﬁnancing through the iP2PGlobal Platform by staking TWQ Tokens. </p>
       <!-- <a href="#about" class="btn-get-started scrollto">Read More</a> -->
-      <a class="btn btn-primary btn-lg" href="{% static "images/ip2p_png.png" %}" download> WHITEPAPER</a>
-       <a class="btn btn-primary btn-lg" href="{% static "images/ip2p_png.png" %}" download> ONE PAGER</a>
+      
+      <a class="btn  btn-lg" style="background-color:#007542; color:white" href="{% static "images/ip2p_png.png" %}" download> WHITEPAPER</a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <a class="btn btn-lg" style="background-color:#007542; color:white" href="{% static "images/ip2p_png.png" %}" download> ONE PAGER</a>
     </div>
 
     <!--
@@ -286,7 +198,7 @@
     <!--==========================
       About Us Section
     ============================-->
-    <section id="about" class="section-bg">
+    <section id="about">
       <div class="container-fluid">
         <div class="section-header">
           <h3 class="section-title">Our Mission</h3>
@@ -303,9 +215,9 @@
           </div>
 
           <div class="col-lg-6 content wow fadeInRight">
-            <p>
-	    P2PGlobal Cryptocurency Financing Platform aims to re-shape personal ﬁnancing by introducing Shariah compliant ﬁnancing products to individuals worldwide. Oﬀering the ﬁrst unsecured crypto ﬁnancing product, it will also feature a single global benchmark rate for loan pricing, a voluntary Takaful compensation fund, full KYC & AML compliance and proper e-lending documentation in addition to smart contract in order to enforced debt collectibility, furthermore ﬁnancing will be in various stablecoins to encourage real world usage.  
-            </p>
+		  <br><br> 
+            <h3 class="text-justify">
+		    iP2PGlobal Cryptocurency Financing Platform aims to re-shape personal financing by introducing Shariah compliant financing products to individuals worldwide. Offering the first unsecured crypto financing product, it will also feature a single global benchmark rate for loan pricing, a voluntary Takaful compensation fund, full KYC & AML compliance and proper e-lending documentation in addition to smart contract in order to enforced debt collectibility, furthermore financing will be in various stablecoins to encourage real world usage.              </h3>
 
 
 	  </div>
@@ -319,8 +231,8 @@
     <!--==========================
       More Features Section
     ============================-->
-    <section id="features" class="section-bg">
-      <div class="container">
+    <section id="features">
+      <div class="container-fluid">
 
         <div class="section-header">
           <h3 class="section-title">Key Features</h3>
@@ -331,16 +243,16 @@
         <div class="row">
 
           <div class="col-lg-6">
-            <div class="box wow fadeInLeft">
-              <div class="icon"><i class="ion-ios-stopwatch-outline"></i></div>
-              <h4 class="title"><a href="">Unsecured Financing</a></h4>
-              <p class="description">iP2PGlobal Platform will introduce an unsecured cryptocurrency ﬁnancing product. Based on our own market research, we will be the ﬁrst cryptocurrency lending platform to provide one. </p>
+		  <div class="box wow fadeInLeft"><br>
+			  <div class="icon"><img  width=68px" height="68px" src="{% static "images/unsecured.jpg"%}" ></div><p></p> 
+             <h4 class="title"><a href="">Unsecured Financing</a></h4>
+              <p class="description"> &nbsp; &nbsp; &nbsp; &nbsp;iP2PGlobal Platform will introduce an unsecured cryptocurrency ﬁnancing product. Based on our own market research, we will be the ﬁrst cryptocurrency lending platform to provide one. </p>
             </div>
           </div>
 
           <div class="col-lg-6">
             <div class="box wow fadeInRight">
-		    <div class="icon"><img  width=70px" height="70px" src="{% static "images/shariah.png"%}" ></div>
+		    <div class="icon"><img  width=100px" height="100px" src="{% static "images/shariah.png"%}" ></div>
               <h4 class="title"><a href="">Shariah Compliant</a></h4>
               <p class="description">Financing products are based on Sharia principles, targeting Muslim population of approx. at 2.18 billion. However the platform is open to everybody regardless of creed or religion.</p>
             </div>
@@ -348,30 +260,30 @@
 
           <div class="col-lg-6">
             <div class="box wow fadeInLeft">
-		    <div class="icon"><img  width=70px" height="70px" src="{% static "images/global.png"%}" ></div> 
+		    <div class="icon"><img  width=100px" height="100px" src="{% static "images/global.png"%}" ></div> 
 	     <h4 class="title"><a href="">Global Platform & Global Rate </a></h4>
-              <p class="description">One single platform to match borrowers and lenders across the globe for p2p personal financing  using one global benchmark rate</p>
+              <p class="description"> &nbsp; &nbsp; &nbsp; &nbsp;One single platform to match borrowers and lenders across the globe for p2p personal financing  using one global benchmark rate</p>
             </div>
           </div>
 
           <div class="col-lg-6">
             <div class="box wow fadeInRight">
-               <div class="icon"><img  width=70px" height="70px" src="{% static "images/takaful.png"%}" ></div>
+               <div class="icon"><img  width=100px" height="100px" src="{% static "images/takaful.png"%}" ></div>
               <h4 class="title"><a href="">Takaful Reserve Fund </a></h4>
               <p class="description">We provide an option to unsecured lenders to contribute and be protected in a default situation.</p>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="box wow fadeInLeft">
-              <div class="icon"><img  width=70px" height="70px" src="{% static "images/aml.png"%}" ></div> 
+              <div class="icon"><img  width=100px" height="100px" src="{% static "images/aml.png"%}" ></div> 
 	     <h4 class="title"><a href="">AML & KYC Compliance</a></h4>
-              <p class="description">We have Anti Money Laundering and Know Your Customer procedures when we register borrowers and lenders onto our platform in line with best banking practices. </p>
+              <p class="description"> &nbsp; &nbsp; &nbsp; &nbsp;We have Anti Money Laundering and Know Your Customer procedures when we register borrowers and lenders onto our platform in line with best banking practices. </p>
             </div>
           </div>
 
           <div class="col-lg-6">
             <div class="box wow fadeInRight">
-              <div class="icon"><img  width=70px" height="70px" src="{% static "images/robust.png"%}" ></div> 
+              <div class="icon"><img  width=100px" height="100px" src="{% static "images/robust.png"%}" ></div> 
 	     <h4 class="title"><a href="">Robust Credit Assessment </a></h4>
               <p class="description">We provide robust assessment by combining bank grade credit scoring model with social credit scoring model</p>
             </div>
@@ -379,7 +291,7 @@
 
           <div class="col-lg-6">
             <div class="box wow fadeInLeft">
-              <div class="icon"><img  width=70px" height="70px" src="{% static "images/auction.png"%}" ></div> 
+              <div class="icon"><img  width=100px" height="100px" src="{% static "images/auction.png"%}" ></div> 
              <h4 class="title"><a href="">Auction</a></h4>
               <p class="description">Two auction methods will be available: fixed rate auction and variable rate auction.</p>
             </div>
@@ -387,7 +299,7 @@
 
           <div class="col-lg-6">
             <div class="box wow fadeInRight">
-              <div class="icon"><img  width=70px" height="70px" src="{% static "images/legal.png"%}" ></div> 
+              <div class="icon"><img  width=100px" height="100px" src="{% static "images/legal.png"%}" ></div> 
              <h4 class="title"><a href="">Legal Protection & Debt Collectibility </a></h4>
               <p class="description">We require E-financing agreements to be executed which is a legal document recognise by laws in many countries, recovery process can be initiated if there is a default situation </p>
             </div>
@@ -400,25 +312,26 @@
 
 
     <!--==========================
-      Itinerary Section
+      Milestone Section
     ============================-->
-    <section id="itinerary" class="section-bg">
-      <div class="container" align="center">
+    <section id="milestone">
+      <div class="container-fluid" align="center">
         <div class="section-header">
-          <h3 class="section-title">Itinerary</h3>
+		<br><br>	
+          <h3 class="section-title">Milestone</h3>
           <span class="section-divider"></span>
         </div>
 	
-	<img width=500px" height="800px" class="img-fluid" src="{% static "images/roadmap.jpg" %}" class="center-block" alt="">
-
+	<img width=1000px" height="800px" class="img-fluid" src="{% static "images/roadmap.jpg" %}" class="center-block" alt="">
+        <br><br>
       </div>
-    </section><!-- #itinerary -->
+    </section><!-- #milestone -->
 
 
     <!--==========================
       Our Team Section
     ============================-->
-    <section id="team" class="section-bg">
+    <section id="team">
       <div class="container">
         <div class="section-header">
           <h3 class="section-title">Our Team</h3>
@@ -428,28 +341,8 @@
         <div class="row wow fadeInUp">
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	    <div class="pic"><img src="{% static "images/rashdan.jpg" %}" alt="" class="btn btn-lg" data-toggle="modal" data-target="#myModal"></div>
-
-	      <div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			      
-	        <!-- Modal content-->
-              <div class="modal-content">
-              <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-           <h4 class="modal-title">Modal Header</h4>
-	   </div>
-	    <div class="modal-body">
-          <p>Some text in the modal.</p>  
-	    </div>
-	   <div class="modal-footer">   
-	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	   </div>
-	    </div>
-	  </div>
-	      </div>
-																						    
-              <h4>Rashdan Ibrhahim</h4>
+	    <div class="pic"><img src="{% static "images/rashdan.jpg" %}" alt=""></div>
+              <h4>Rashdan Ibrahim</h4>
               <span>Chief Executive Officer</span>
               <div class="social">
                 <a href="https://www.linkedin.com/in/morib/"><i class="fa fa-linkedin"></i></a>
@@ -530,56 +423,57 @@
     <!--==========================
       Our Advisor Section
     ============================-->
-    <section id="advisor" class="section-bg">
+    <section id="team">
       <div class="container">
         <div class="section-header">
-          <h3 class="section-title">Our Advisor</h3>
+	<br><br><h3 class="section-title">Our Advisor</h3>
           <span class="section-divider"></span>
         </div>
     
         <div class="row wow fadeInUp">
           <div class="col-lg-3 col-md-6">
             <div class="member">
-            <div class="pic"><img src="{% static "images/ahcene.jpg" %}" alt=""></div>
-	    <br>  <h4>Dr Ahcene Lahsasna</h4>
+		    <img src="{% static "images/ahcene.jpg" %}" alt=""><br><br>
+	    <h4 style="text-align:center">Dr Ahcene Lahsasna</h4>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	      <div class="pic"><img src="{% static "images/azzizi.jpg" %}" alt=""></div>
-	      <br> <h4>Azzizi Mohamad Ghazi</h4>
+		    <img src="{% static "images/azzizi.jpg" %}" alt=""><br><br>
+	      <h4 style="text-align:center">Azzizi Mohamad Ghazi</h4>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	     <div class="pic"><img src="{% static "images/azaraie.jpg" %}" alt=""></div>
-	     <br> <h4>Azaraie Mohamad Ghazi</h4>
+		    <img src="{% static "images/azaraie.jpg" %}" alt=""><br><br>
+	     <h4 style="text-align:center">Azaraie Mohamad Ghazi</h4>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	    <div class="pic"><img src="{% static "images/scott.jpg" %}" alt=""></div>      
-	    <br> <h4>Scott Phillips</h4>
+		    <img src="{% static "images/scott.jpg" %}" alt=""><br><br>
+	    <h4 style="text-align:center">Scott Phillips</h4>
             </div>
           </div>
+	  <br>
           
 	   <div class="col-lg-3 col-md-6">
 	   </div>	   
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	      <div class="pic"><img src="{% static "images/azmin.jpg" %}" alt=""></div>
-	      <br> <h4>azmin hassan</h4>
+		    <img src="{% static "images/azmin.jpg" %}" alt=""><br><br>
+	      <h4 style="text-align:center">Azmin Hassan</h4>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6">
             <div class="member">
-	     <div class="pic"><img src="{% static "images/rahman.jpg" %}" alt=""></div>
-	     <br> <h4>abdul rahman ibrahim</h4>
+		    <img src="{% static "images/rahman.jpg" %}" alt=""><br><br>
+	     <h4 style="text-align:center">Abdul Rahman Ibrahim</h4>
             </div>
           </div>
 
@@ -590,19 +484,19 @@
     <!--==========================
       Partners Section
     ============================-->
-    <section id="partner" class="section-bg">
+    <section id="partner" >
       <div class="container" align="center">
         <div class="section-header">
-          <h3 class="section-title">Our Partner</h3>
+	<br><br>   <h3 class="section-title">Our Partner</h3>
           <span class="section-divider"></span>
         </div>
 	
 
 
-	      <div class="pic"><img src="{% static "images/ableace.png" %}" class="img-fluid"alt=""></div>
+	      <a><img src="{% static "images/ableace.png" %}" class="img-fluid"alt=""></a>
 
-	     <div class="pic"><img src="{% static "images/salihin.png" %}" class="img-fluid" alt=""></div>
-	     <br>
+	     <a><img src="{% static "images/salihin.png" %}" class="img-fluid" alt=""></a>
+	     <br><br>
       </div>
     </section><!-- #partners -->
 
@@ -610,25 +504,40 @@
     <!--==========================
       EXmarkets Section
     ============================-->
-    <section id="exmarkets" class="section-bg">
+    <section id="team">
       <div class="container" align="center">
         <div class="section-header">
-     <h3 class="section-title">Markets</h3> 
+	<br><br> <h3 class="section-title">Markets</h3> 
           <span class="section-divider"></span>
         </div>
 
 	  <h3 style="color:black">READY TO SUBSCRIBE TWQ?</h3>
-	  <h4 style="color:black">It will be available on ExMarkets Launchpad It will be available on ExMarkets Launchpad</h4>
-	              <img  width=300px" height="100px" src="{% static "images/exmarkets.png"%}" >
-	 <h4 style="color:white">in</h4>	      
+	  <!-- <h4 style="color:black">It will be available on ExMarkets Launchpad</h4>
+	  <img  width=300px" height="60px" src="{% static "images/exmarkets.png"%}" >
+	  <h4 style="color:white">in</h4>-->	      
 	
-         <h1 id="demo"></h1>
+         <a class="text-info" style="font-size: 3vw"  id="demo"></a>
 
 	     <br>
       </div>
     </section><!-- #partners -->
 
 
+    <!--==========================
+      
+    ============================-->
+    <section id="team">
+      <div class="container" align="center">
+        <div class="section-header">
+	<br><br> <h3 class="section-title">As Seen On</h3> 
+          <span class="section-divider"></span>
+        </div>
+
+	
+
+	     <br>
+      </div>
+    </section><!-- #partners -->
 
     <!--==========================
       Contact Section
@@ -638,23 +547,30 @@
         <div class="row wow fadeInUp">
         
 	<div class="col-lg-4 col-md-8">
-        <img  width=150px" height="150px" src="{% static "images/ip2p_png.png"%}" >
+        <img  width=120px" height="120px" src="{% static "images/ip2pglobal_logo.png"%}" >
         </div>
 
-          <div class="col-lg-4 col-md-8">
-            <div class="contact-about">
-              <h3>Follow Us!</h3>
-              <div class="social-links">
-                <a href="https://twitter.com/ip2pGo" class="twitter"><i class="fa fa-twitter"></i></a>
-                <a href="https://www.facebook.com/ip2pgo/" class="facebook"><i class="fa fa-facebook"></i></a>
-                <a href="https://www.instagram.com/ip2pgo/" class="instagram"><i class="fa fa-instagram"></i></a>
-                <a href="https://www.youtube.com/channel/UCJTvFPHUqFv2rYyt0_tHMDQ" class="youtube"><i class="fa fa-youtube"></i></a>
-                <a href="https://t.me/ip2pgo" class="telegram"><i class="fa fa-telegram"></i></a>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-2 col-md-3">
+	<h5><b>Resources</b></h5>
+	<a href="#about">About Us</a><br>
+	<a href="">Missions</a><br>
+	<a href="">Features</a><br>
+	<a href="">Milestone</a><br>
+	<a href="">Team</a><br>
+	<a href="">Partners</a><br>
+			
+	</div>
 
-          <div class="col-lg-3 col-md-4">
+	 <div class="col-lg-3 col-md-4">
+	<h5><b>Help</b></h5>
+	<a href="#about" style="text-color:black">FAQ</a><br>
+	<a href="#" download>Whitepaper</a><br>
+		<a href="#" download>Lightpaper</a><br>
+			<a href="#about">Factbook</a><br>
+				<a href="#about">Terms & Conditions</a><br>
+	 </div>
+	
+	<div class="col-lg-3 col-md-4">
             <div class="info">
               <div>
                 <i class="ion-ios-location-outline"></i>
@@ -666,10 +582,10 @@
                 <p>ip2pglobal@gmail.com</p>
               </div>
 
-              <div>
+           <!--   <div>
                 <i class="ion-ios-telephone-outline"></i>
                 <p>+1 5589 55488 55s</p>
-              </div>
+	   </div> -->
 
             </div>
           </div>
@@ -688,7 +604,7 @@
       <div class="row">
         <div class="col-lg-6 text-lg-left text-center">
           <div class="copyright">
-            &copy; Copyright <strong>2019 iP2PGo</strong>. All Rights Reserved
+            &copy; Copyright <strong>2019 iP2PGlobal</strong>. All Rights Reserved
           </div>
 	<!--
         <div class="col-lg-6">
@@ -707,20 +623,6 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
   <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery/jquery-migrate.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/easing/easing.min.js"></script>
-  <script src="lib/wow/wow.min.js"></script>
-  <script src="lib/superfish/hoverIntent.js"></script>
-  <script src="lib/superfish/superfish.min.js"></script>
-  <script src="lib/magnific-popup/magnific-popup.min.js"></script>
-
-  <!-- Contact Form JavaScript File -->
-  <script src="contactform/contactform.js"></script>
-
-  <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
 
 </body>
 </html>
